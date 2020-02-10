@@ -2,9 +2,21 @@
 
 __all__ = ["index", "modules", "custom_doc_links", "git_url"]
 
-index = {}
+index = {"MyServer": "01_to_csv.ipynb",
+         "Handel": "01_to_csv.ipynb",
+         "datetime_fix": "01_to_csv.ipynb",
+         "get_activities": "01_to_csv.ipynb",
+         "Handel.get_activities": "01_to_csv.ipynb",
+         "get_streams": "01_to_csv.ipynb",
+         "parse_activity": "01_to_csv.ipynb",
+         "parse_activitys": "01_to_csv.ipynb",
+         "Handel.get_streams": "01_to_csv.ipynb",
+         "Handel.parse_activity": "01_to_csv.ipynb",
+         "Handel.parse_activitys": "01_to_csv.ipynb",
+         "parse_tss": "Untitled.ipynb"}
 
-modules = []
+modules = ["to_csv.py",
+           "parse.py"]
 
 doc_url = "https://takotabak.github.io/strava_overview/"
 
