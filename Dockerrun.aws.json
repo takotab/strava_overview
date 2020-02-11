@@ -1,0 +1,12 @@
+{
+    "Image": {
+      "Name": "motionreview"
+    },
+    "Ports": [
+      {
+        "ContainerPort": 8501,
+        "HostPort": 8000
+      }
+    ]
+  }
+     

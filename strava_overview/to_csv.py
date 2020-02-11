@@ -122,25 +122,30 @@ def parse_activity(self, act):
     act_id = act.id
     name = act.name
     print(str(act_id), str(act.name), act.start_date)
-    streams = self.get_streams(act_id, self.types)
-    df = pd.DataFrame()
-
-    # Write each row to a dataframe
-    for item in self.types:
-        if item in list(streams.keys()):
-            df[item] = pd.Series(streams[item].data, index=None)
-        df["act_id"] = act.id
-        df["act_startDate"] = pd.to_datetime(act.start_date)
-        df["act_name"] = name
     f = str(act_id) + '.csv'
-    df.to_csv(f, index=False)
+    if not os.path.isfile(f):
+        streams = self.get_streams(act_id, self.types)
+        df = pd.DataFrame()
+
+        # Write each row to a dataframe
+        for item in self.types:
+            if item in list(streams.keys()):
+                df[item] = pd.Series(streams[item].data, index=None)
+            df["act_id"] = act.id
+            df["act_startDate"] = pd.to_datetime(act.start_date)
+            df["act_name"] = name
+        df.to_csv(f, index=False)
+    else:
+        df = pd.read_csv(f)
     return df, f
 Handel.parse_activity = parse_activity
 
-def parse_activitys(self, activities:[]):
+def parse_activitys(self, activities:[], streamlit_progress = None):
     fs = []
-    for act in activities:
+    for i, act in enumerate(activities):
         df, f = self.parse_activity(act)
         fs.append(f)
+        if streamlit_progress is not None:
+            streamlit_progress((i+1)/(len(activities)))
     return fs
 Handel.parse_activitys = parse_activitys

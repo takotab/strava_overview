@@ -17,6 +17,6 @@ COPY . /app
 
 RUN pip install -e .
 
-EXPOSE 5000
+EXPOSE 8501
 
 CMD ["bash", "start_streamlit.sh"]

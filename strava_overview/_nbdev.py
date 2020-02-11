@@ -16,6 +16,8 @@ index = {"MyServer": "01_to_csv.ipynb",
          "interpolate": "02_parse.ipynb",
          "moving_average": "02_parse.ipynb",
          "training_impulse": "02_parse.ipynb",
+         "Zones": "02_parse.ipynb",
+         "training_impulse_hr": "02_parse.ipynb",
          "parse_tss": "02_parse.ipynb"}
 
 modules = ["to_csv.py",

@@ -142,3 +142,8 @@ checklink/cookies.txt
 
 auth_token.json
 # deploy.zip
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
