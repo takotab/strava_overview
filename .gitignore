@@ -141,3 +141,4 @@ checklink/cookies.txt
 *.secret
 
 auth_token.json
+deploy.zip
