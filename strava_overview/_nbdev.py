@@ -13,7 +13,10 @@ index = {"MyServer": "01_to_csv.ipynb",
          "Handel.get_streams": "01_to_csv.ipynb",
          "Handel.parse_activity": "01_to_csv.ipynb",
          "Handel.parse_activitys": "01_to_csv.ipynb",
-         "parse_tss": "Untitled.ipynb"}
+         "interpolate": "02_parse.ipynb",
+         "moving_average": "02_parse.ipynb",
+         "training_impulse": "02_parse.ipynb",
+         "parse_tss": "02_parse.ipynb"}
 
 modules = ["to_csv.py",
            "parse.py"]

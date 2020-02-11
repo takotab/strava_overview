@@ -27,7 +27,8 @@ import urllib.parse
 import webbrowser
 import os
 import pandas as pd
-# import datetime
+import sys
+from fastcore.utils import *
 
 # Cell
 class Handel:
@@ -105,9 +106,8 @@ def get_activities(self, start_date = None, days = 7):
     # Returns a list of Strava activity objects, up to the number specified by limit
     activities = self.client.get_activities(before = before, after=after)
 #     assert len(list(activities)) == limit
-    for item in activities:
-        print(pd.to_datetime(item.start_date_local))
-    return activities
+    return {item.name:item for item in activities}
+
 Handel.get_activities = get_activities
 
 
