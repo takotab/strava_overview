@@ -10,7 +10,7 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - name: Generate deployment package
-        run: deploy.sh
+        run: bash deploy.sh
 
       - name: Deploy to EB
         uses: einaregilsson/beanstalk-deploy@v5
