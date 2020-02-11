@@ -8,8 +8,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      # - name: Generate deployment package
-      #   run: deploy.sh
+      - uses: actions/checkout@v1
+    steps:
+      - name: Generate deployment package
+        run: deploy.sh
 
       - name: Deploy to EB
         uses: einaregilsson/beanstalk-deploy@v5
