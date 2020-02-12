@@ -1,5 +1,5 @@
 {
-  "AWSEBDockerrunVersion": "18.09.9-ce",
+  "AWSEBDockerrunVersion": "1",
   "Image": {
     "Name": "motionreview",
     "Update": "true",
