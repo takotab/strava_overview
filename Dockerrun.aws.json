@@ -1,7 +1,8 @@
 {
-    "Image": {
-      "Name": "motionreview"
-    },
+  "AWSEBDockerrunVersion": "18.09.9-ce",
+  "Image": {
+    "Name": "motionreview",
+    "Update": "true",
     "Ports": [
       {
         "ContainerPort": 8501,
@@ -9,4 +10,4 @@
       }
     ]
   }
-     
+}
