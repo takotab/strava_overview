@@ -59,12 +59,13 @@ def main():
         my_bar = st.progress(0)
         p = lambda x: my_bar.progress(x)
         fs = h.parse_activitys(act_lst, streamlit_progress=p)
-        
 
-    acts = {}
-    dates = [pd.Timestamp(o.start_date).date() for o in act_lst]
-    dates = {k.date(): 0.0 for k in list(pd.date_range(min(dates), pd.Timestamp.now()))}
     if fs:
+        acts = {}
+        dates = [pd.Timestamp(o.start_date).date() for o in act_lst]
+        dates = {
+            k.date(): 0.0 for k in list(pd.date_range(min(dates), pd.Timestamp.now()))
+        }
         del my_bar
         max_hr = st.number_input("Wat is uw maximale hartslag:", 0, 300, 200)
         my_bar = st.progress(0)
@@ -80,7 +81,9 @@ def main():
             }
             dates[pd.Timestamp(act.start_date).date()] += tri
         del my_bar
-        df = pd.DataFrame({k: {"Trainings impuls": v} for k, v in dates.items()}).T
+        df = pd.DataFrame(
+            {k: {"Trainings impuls": np.round(v, 0)} for k, v in dates.items()}
+        ).T
         st.write(df)
         st.bar_chart(df)
         st.markdown("---")
