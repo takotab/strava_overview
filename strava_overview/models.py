@@ -17,14 +17,14 @@ from fastcore.utils import *
 import time
 
 # Cell
-from .auth import get_access_token, AuthToken
+# from strava_overview.auth import get_access_token, AuthToken
 class Handel:
     def __init__(self, auth = None):
         self.auth = ifnone(auth, AuthToken())
         if not self.auth.exists:
             raise FileNotFoundError()
         self.client = stravalib.client.Client()
-        self.client.access_token = get_access_token()
+        self.client.access_token = get_access_token() # TODO make it work with new system
 
         self.athlete = self.client.get_athlete()
         print(f"Welcome {self.athlete.firstname} {self.athlete.lastname}")
@@ -67,27 +67,30 @@ class Athlete(Model):
     zones = ListAttribute(null=True)
     password = UnicodeAttribute(null=True)
     email = UnicodeAttribute(null=True)
+    access_token = UnicodeAttribute(null=True)
     refresh_token = UnicodeAttribute(null=True)
 
     @classmethod
-    def from_stravalib(cls, athlete:stravalib.model.Athlete):
+    def from_stravalib(cls, athlete:stravalib.model.Athlete, **kwargs):
         dct = {k:athlete.__getattribute__(k) for k in 'firstname,lastname,profile,sex,max_heartrate,weight,ftp'.split(',') if (athlete.__getattribute__(k) is not None)}
-        print(dct)
+        dct.update(kwargs)
         ath = cls(athlete.id,**dct)
         ath.save()
         return ath
 
     @classmethod
-    def authenticate(cls):
+    def authenticate(cls, sleep_time = 60):
         client = stravalib.client.Client()
         go_strava_auth(client)
+        tokens = Tokens()
         i = 0
-        while i < 60:
-
+        while i < sleep_time:
             i+=1
             time.sleep(1)
-
-
+            id = tokens.is_new()
+            if id:
+                return Athlete.query(int(id))
+        raise FileNotFoundError
 
 # Cell
 def check_athlete(ath:stravalib.model.Athlete):

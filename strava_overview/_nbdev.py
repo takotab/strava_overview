@@ -2,12 +2,7 @@
 
 __all__ = ["index", "modules", "custom_doc_links", "git_url"]
 
-index = {"Tokens": "00_auth.ipynb",
-         "AuthToken": "00_auth.ipynb",
-         "save_code_to_token": "00_auth.ipynb",
-         "go_strava_auth": "00_auth.ipynb",
-         "get_access_token": "00_auth.ipynb",
-         "upload_file": "00_s3.ipynb",
+index = {"upload_file": "00_s3.ipynb",
          "download_file": "00_s3.ipynb",
          "Handel": "01_models.ipynb",
          "Athlete": "01_models.ipynb",
@@ -30,12 +25,15 @@ index = {"Tokens": "00_auth.ipynb",
          "get_max_heartrate": "02_ti.ipynb",
          "Activity.get_max_heartrate": "02_ti.ipynb",
          "make_ti": "02_ti.ipynb",
-         "Activity.make_ti": "02_ti.ipynb"}
+         "Activity.make_ti": "02_ti.ipynb",
+         "Tokens": "04_auth.ipynb",
+         "save_code_to_token": "04_auth.ipynb",
+         "go_strava_auth": "04_auth.ipynb"}
 
-modules = ["auth.py",
-           "s3.py",
-           "to_csv.py",
-           "ti.py"]
+modules = ["s3.py",
+           "models.py",
+           "ti.py",
+           "auth.py"]
 
 doc_url = "https://takotabak.github.io/strava_overview/"
 
