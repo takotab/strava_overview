@@ -2,26 +2,38 @@
 
 __all__ = ["index", "modules", "custom_doc_links", "git_url"]
 
-index = {"MyServer": "01_to_csv.ipynb",
+index = {"AuthToken": "00_auth.ipynb",
+         "save_code_to_token": "00_auth.ipynb",
+         "get_access_token": "00_auth.ipynb",
+         "upload_file": "00_s3.ipynb",
+         "download_file": "00_s3.ipynb",
          "Handel": "01_to_csv.ipynb",
+         "Athlete": "01_to_csv.ipynb",
+         "types": "01_to_csv.ipynb",
+         "check_athlete": "01_to_csv.ipynb",
          "datetime_fix": "01_to_csv.ipynb",
+         "Activity": "01_to_csv.ipynb",
          "get_activities": "01_to_csv.ipynb",
          "Handel.get_activities": "01_to_csv.ipynb",
-         "get_streams": "01_to_csv.ipynb",
-         "parse_activity": "01_to_csv.ipynb",
-         "parse_activitys": "01_to_csv.ipynb",
-         "Handel.get_streams": "01_to_csv.ipynb",
-         "Handel.parse_activity": "01_to_csv.ipynb",
-         "Handel.parse_activitys": "01_to_csv.ipynb",
-         "interpolate": "02_parse.ipynb",
-         "moving_average": "02_parse.ipynb",
-         "training_impulse": "02_parse.ipynb",
-         "Zones": "02_parse.ipynb",
-         "training_impulse_hr": "02_parse.ipynb",
-         "parse_tss": "02_parse.ipynb"}
+         "save_activities": "01_to_csv.ipynb",
+         "Handel.save_activities": "01_to_csv.ipynb",
+         "interpolate": "02_ti.ipynb",
+         "moving_average": "02_ti.ipynb",
+         "norm_power": "02_ti.ipynb",
+         "training_impulse_power": "02_ti.ipynb",
+         "Zones": "02_ti.ipynb",
+         "training_impulse_hr": "02_ti.ipynb",
+         "get_ftp": "02_ti.ipynb",
+         "Activity.get_ftp": "02_ti.ipynb",
+         "get_max_heartrate": "02_ti.ipynb",
+         "Activity.get_max_heartrate": "02_ti.ipynb",
+         "make_ti": "02_ti.ipynb",
+         "Activity.make_ti": "02_ti.ipynb"}
 
-modules = ["to_csv.py",
-           "parse.py"]
+modules = ["auth.py",
+           "s3.py",
+           "to_csv.py",
+           "ti.py"]
 
 doc_url = "https://takotabak.github.io/strava_overview/"
 
