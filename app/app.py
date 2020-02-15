@@ -1,6 +1,4 @@
 import streamlit as st
-from strava_overview.to_csv import *
-from strava_overview.parse import *
 import pandas as pd
 import numpy as np
 import os
@@ -22,13 +20,10 @@ dagen_van_week = {
 
 def main():
     st.header("Motion Review")
-    st.subheader("Een overview van jou trainingsweek")
-    client_id, secret = open("client.secret").read().strip().split(",")
-    h = Handel(client_id, secret)
-    if not os.path.isfile("auth_token.json"):
-        if st.button("Get strava Authentication"):
-            h.start()
-            print(h.athlete)
+    st.subheader("Een overview van jou trainingsweek")    
+    if st.button("Get strava Authentication"):
+        h.start()
+        print(h.athlete)
     act_lst = []
 
     if os.path.isfile("auth_token.json"):
