@@ -10,7 +10,6 @@ import os
 import stravalib
 import webbrowser
 from fastcore.all import *
-from .models import *
 
 # Cell
 from dotenv import load_dotenv, find_dotenv
@@ -22,7 +21,7 @@ class Tokens:
     """A messenger between to procces to comunicate an id which has been handled."""
     def __init__(self, f="tokens.json"):
         try:
-            f = find_dotenv(f,raise_error_if_not_found=True)
+            f = find_dotenv(f, raise_error_if_not_found=True)
         except:
             f = "tokens.json"
         self.f = f
@@ -42,7 +41,7 @@ class Tokens:
         return False
 
     def reset(self, hard = False):
-        if hard:
+        if hard or not os.path.isfile(self.f):
             with open(self.f,'w') as f:
                 f.write('id,new\n')
         self.is_new()
@@ -73,7 +72,9 @@ def save_code_to_token(state, tokens=None, client = None, make_ath=True):
     tokens.add(athlete.id)
 
 
-def go_strava_auth(client):
+
+# Cell
+def go_strava_auth(client:stravalib.client.Client):
     """Excecuted by the front-end to start an auth request."""
     host = os.getenv("host")
     url = 'http://' +host+ ':5555/authorized'
@@ -81,4 +82,3 @@ def go_strava_auth(client):
         client_id=client_id, redirect_uri=url, scope="activity:read_all"
     )
     webbrowser.open(authorize_url)
-

@@ -14,6 +14,8 @@ import pandas as pd
 import sys
 from fastcore.utils import *
 import time
+from .s3 import *
+from .auth import *
 
 # Cell
 from pynamodb.models import Model
@@ -22,7 +24,6 @@ from pynamodb.attributes import (
 )
 
 # Cell
-from .s3 import *
 
 types = [
             "time",
@@ -75,7 +76,7 @@ class Athlete(Model):
             time.sleep(1)
             id = tokens.is_new()
             if id:
-                return get_athlete(id = id)
+                return cls.get_athlete(id = id)
         raise FileNotFoundError
 
     @classmethod
@@ -99,7 +100,6 @@ class Athlete(Model):
             raise IndexError(f"to many athlets with id {ath.id}:{aths}")
 
 # Cell
-from .s3 import *
 
 types = [
             "time",

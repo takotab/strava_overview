@@ -148,4 +148,4 @@ auth_token.json
 !.elasticbeanstalk/*.cfg.yml
 !.elasticbeanstalk/*.global.yml
 motionreview-ddc347cc92a5.json
-nbs/tokens.json
+*tokens.json
