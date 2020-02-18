@@ -6,14 +6,7 @@ __all__ = ['Athlete', 'types', 'Activity', 'types', 'Handel', 'datetime_fix', 'g
 import json
 
 # Cell
-import stravalib
-import urllib.parse
-import webbrowser
-import os
-import pandas as pd
-import sys
-from fastcore.utils import *
-import time
+from .imports import *
 from .s3 import *
 from .auth import *
 

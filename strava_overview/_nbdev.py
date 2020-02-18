@@ -26,13 +26,14 @@ index = {"upload_file": "00_s3.ipynb",
          "make_ti": "02_ti.ipynb",
          "Activity.make_ti": "02_ti.ipynb",
          "Tokens": "04_auth.ipynb",
-         "save_code_to_token": "04_auth.ipynb",
-         "go_strava_auth": "04_auth.ipynb"}
+         "go_strava_auth": "04_auth.ipynb",
+         "save_code_to_token": "05_backend.ipynb"}
 
 modules = ["s3.py",
            "models.py",
            "ti.py",
-           "auth.py"]
+           "auth.py",
+           "backend.py"]
 
 doc_url = "https://takotabak.github.io/strava_overview/"
 

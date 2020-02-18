@@ -1,7 +1,7 @@
 import uvicorn
 from fastapi import FastAPI
 
-from strava_overview.auth import save_code_to_token
+from strava_overview.backend import save_code_to_token
 
 app = FastAPI()
 

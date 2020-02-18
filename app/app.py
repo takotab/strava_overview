@@ -4,6 +4,8 @@ import numpy as np
 import os
 from collections import defaultdict
 
+from strava_overview.models import *
+
 # def sidebar():
 #     st.sidebar.input_text()
 
@@ -22,8 +24,7 @@ def main():
     st.header("Motion Review")
     st.subheader("Een overview van jou trainingsweek")    
     if st.button("Get strava Authentication"):
-        h.start()
-        print(h.athlete)
+        ath = Athlete.authenticate()
     act_lst = []
 
     if os.path.isfile("auth_token.json"):
