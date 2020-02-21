@@ -10,10 +10,7 @@ import os
 import stravalib
 import webbrowser
 from fastcore.all import *
-
-# Cell
-from dotenv import load_dotenv, find_dotenv
-load_dotenv(find_dotenv())
+from .imports import *
 client_id, secret = os.getenv("client_id"), os.getenv("secret")
 
 # Cell

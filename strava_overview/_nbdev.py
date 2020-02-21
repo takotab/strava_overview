@@ -4,6 +4,10 @@ __all__ = ["index", "modules", "custom_doc_links", "git_url"]
 
 index = {"upload_file": "00_s3.ipynb",
          "download_file": "00_s3.ipynb",
+         "EmailIndex": "01_models.ipynb",
+         "AlreadyFoundExeption": "01_models.ipynb",
+         "IncorrectPassword": "01_models.ipynb",
+         "LockedAccount": "01_models.ipynb",
          "Athlete": "01_models.ipynb",
          "types": "01_models.ipynb",
          "Activity": "01_models.ipynb",

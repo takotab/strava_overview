@@ -24,10 +24,12 @@ def save_code_to_token(state, tokens=None, client = None, make_ath=True):
         )
     client.access_token = token['access_token']
     athlete = client.get_athlete()
+
     if make_ath:
         ath = Athlete.from_stravalib(athlete)
         ath.access_token = token['access_token']
         ath.refresh_token = token['refresh_token']
         ath.save()
+
     tokens.add(athlete.id)
 
