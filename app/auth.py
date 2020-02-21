@@ -7,24 +7,11 @@ import pandas as pd
 import streamlit as st
 
 from strava_overview.models import *
-
-dagen_van_week = {
-    0: "Maandag",
-    1: "Dinsdag",
-    2: "Woensdag",
-    3: "Donderdag",
-    4: "Vrijdag",
-    5: "Zaterdag",
-    6: "Zondag",
-}
 import SessionState
 
 
-def main():
-    st.header("Motion Review")
-    st.subheader("Een overview van jou trainingsweek")
+def auth(state):
     ath = None
-    state = SessionState.get(trys=0)
     if ath == None:
         auth = st.button("Authenticate strava")
         st.subheader("Of login:")
@@ -32,16 +19,16 @@ def main():
         ww = st.text_input("Wachtword", type="password")
 
         if auth:
-            ath = Athlete.authenticate()
+            state.ath = Athlete.authenticate()
             st.balloons()
             st.write("Authenticated")
-            return ath
+            return state
         if email and ww:
             state.trys += 1
             try:
-                ath = Athlete.login(email, ww, state.trys)
+                state.ath = Athlete.login(email, ww, state.trys)
                 st.balloons()
-                return ath
+                return state
             except IncorrectPassword:
                 st.warning("Het wachtwoord is incorrect.")
 
@@ -58,4 +45,5 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    state = SessionState.get(trys=0)
+    auth(state)
