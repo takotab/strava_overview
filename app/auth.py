@@ -6,28 +6,28 @@ import numpy as np
 import pandas as pd
 import streamlit as st
 
-from strava_overview.models import *
 import SessionState
+from strava_overview.models import *
 
 
-def auth(state):
+def auth(state, locations):
     ath = None
     if ath == None:
-        auth = st.button("Authenticate strava")
-        st.subheader("Of login:")
-        email = st.text_input("Email")
-        ww = st.text_input("Wachtword", type="password")
+        auth = locations[0].button("Authenticate strava")
+        locations[1].subheader("Of login:")
+        email = locations[2].text_input("Email")
+        ww = locations[3].text_input("Wachtword", type="password")
 
         if auth:
             state.ath = Athlete.authenticate()
             st.balloons()
-            st.write("Authenticated")
             return state
         if email and ww:
             state.trys += 1
             try:
                 state.ath = Athlete.login(email, ww, state.trys)
                 st.balloons()
+                state.trys = -1
                 return state
             except IncorrectPassword:
                 st.warning("Het wachtwoord is incorrect.")
@@ -46,4 +46,5 @@ def auth(state):
 
 if __name__ == "__main__":
     state = SessionState.get(trys=0)
-    auth(state)
+    locations = [st.empty() for _ in range(2)]
+    auth(state, locations)
