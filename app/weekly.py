@@ -17,22 +17,6 @@ def make_df(acts):
     return pd.DataFrame([act.row() for act in acts[::-1]])
 
 
-emoji_dct = {"Ride": "🚲", "Virtual": "🎮", "Weight": "💪", "Run": "🏃‍♀️", "Swim": "🏊‍♂️"}
-
-
-def _add_bike(row):
-    for k, v in emoji_dct.items():
-        if k in row["Type"]:
-            if v not in row["Naam"]:
-                row["Naam"] = v + row["Naam"]
-    return row
-
-
-def make_bike(df):
-    df = df.apply(_add_bike, 1)
-    return df
-
-
 def weekly(state, locs):
     locs[0].text(f"hello {state.ath.firstname} {state.ath.lastname}")
     days = 7
@@ -41,8 +25,9 @@ def weekly(state, locs):
     acts[0].get_max_heartrate()
     locs[1].text(f"Hieronder de activiteiten van de laatste {days} dagen:")
     df = make_df(acts)
-    df = make_bike(df)
-    st.write(df, unsafe_allow_html=True)
+    df = emoji_name(df)
+    del df["Type"]
+    locs[1].dataframe(df)
     s = df.Duur.sum()
     locs[3].text(f"Totale inspannings tijd: {s}")
     # if os.path.isfile("auth_token.json"):
