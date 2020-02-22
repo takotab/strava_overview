@@ -11,6 +11,10 @@ from fastcore.imports import *
 from typing import List, Dict
 
 # Cell
+# Global Variables - put your data in the file 'client.secret' and separate the fields with a comma!
+# client_id, secret = open("../client.secret").read().strip().split(",")
+
+# Cell
 from .imports import *
 from .s3 import *
 from .auth import *
@@ -178,6 +182,7 @@ class Handel:
         self.strava_athlete = self.client.get_athlete()
 
     def set_access_token(self):
+        client_id, secret = os.getenv("client_id"), os.getenv("secret")
         self.client.access_token = self.athlete.access_token
         try:
             self.strava_athlete = self.client.get_athlete()
