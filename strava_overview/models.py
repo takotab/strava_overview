@@ -193,7 +193,9 @@ types = [
     ]
 
 # Cell
-class Activity(Model):
+from fastcore.foundation import *
+class Activity(Model, GetAttr):
+    _default = '_act'
     class Meta:
         table_name = "motionreview-activity"
         region = 'eu-central-1'
@@ -203,7 +205,6 @@ class Activity(Model):
     start_date_local = UTCDateTimeAttribute()
     name = UnicodeAttribute()
     act_type = UnicodeAttribute()
-    elapsed_time = NumberAttribute()
     device_watts = BooleanAttribute(default=False)
     has_heartrate = BooleanAttribute(default=False)
     on_s3 = BooleanAttribute(default=False)
@@ -218,22 +219,26 @@ class Activity(Model):
         activity = cls(id = str(act.id), name = act.name, athlete_id = str(act.athlete.id), act_type = act.type,
                         device_watts=device, start_date_local = act.start_date_local, has_heartrate = act.has_heartrate,
                         )
-        activity.act = act
+        activity._act = act
         return activity
 
     @classmethod
-    def from_id(cls, id):
-        return get_activity(id = id)
+    def from_id(cls, id, h:Handel=None):
+        activity = get_activity(id = id, h=h)
 
     @staticmethod
-    def get_activity(id = None, act:stravalib.model.Activity = None):
+    def get_activity(id = None, act:stravalib.model.Activity = None, h:Handel=None):
+        if id is None and act is None:
+            raise Exception('`id` and `act` can not be `None`')
         if id is None:
             assert type(act) == stravalib.model.Activity
             id = act.id
 
         acts =list(Activity.query(int(id)))
         if len(acts) == 1:
-            return aths[0]
+            if handel is not None:
+                acts[0]._act = h.client.get_activity(str(id))
+            return acts[0]
         elif len(acts) == 0:
             return Activity.from_stravalib(ath)
         else:
@@ -243,6 +248,7 @@ class Activity(Model):
         if not self.on_s3:
             streams = h.client.get_activity_streams(self.id, types=types, series_type="time")
             self.download_save(streams)
+        self.h = h
 
     def filename(self):
         if not os.path.isdir(self.athlete_id):
@@ -290,6 +296,11 @@ class Handel:
             )
         self.strava_athlete = self.client.get_athlete()
 
+
+def _get_st_act(self, h:Handel = None):
+    h = ifnone(h, self.h)
+    self.act = h.client.get_activity(str(self.id))
+Activity._get_st_act = _get_st_act
 
 # Cell
 def datetime_fix(start_date, days):
