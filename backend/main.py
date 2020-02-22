@@ -20,4 +20,4 @@ def auth(code: str, scope: str):
 
 
 if __name__ == "__main__":
-    uvicorn.run("main:app", port=5555)
+    uvicorn.run("main:app", port=8080)
