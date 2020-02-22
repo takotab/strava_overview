@@ -8,15 +8,22 @@ import streamlit as st
 
 import SessionState
 from strava_overview.models import *
+from strava_overview.ti import *
 
 
-def weekly(state, locations):
+def weekly(state, locs):
+    locs[0].text(f"hello {state.ath.firstname} {state.ath.lastname}")
+    days = 7
+    h = Handel(str(state.ath.id))
+    acts = h.get_activities(start_date=None, days=7)
+    acts[0].get_max_heartrate()
+    locs[1].text(f"Hieronder de activiteiten van de laatste {days} dagen:")
 
     # if os.path.isfile("auth_token.json"):
     #     non_hr = st.checkbox("Inclusief activteiten zonder hartslag.")
     #     h.start()
     #     st.write(f"Welcome {h.athlete.firstname} {h.athlete.lastname}")
-    #     days = 7
+
     #     st.write(f"Hieronder de activiteiten van de laatste {days} dagen:")
     #     acts = h.get_activities(days=days)
     #     df = {}
@@ -71,6 +78,10 @@ def weekly(state, locations):
     #     st.subheader(f"Je totale trainings impuls voor de laatste 7 days was: ")
     #     st.header(f"{np.round(t_tri, 0)}")
 
-    if __name__ == "__main__":
-        
-        weekly()
+
+if __name__ == "__main__":
+    ath = Athlete.get_athlete("5058582")
+    state = SessionState.get(trys=0, ath=ath)
+    locations = [st.empty() for _ in range(4)]
+    print(locations[0])
+    weekly(state, locations)

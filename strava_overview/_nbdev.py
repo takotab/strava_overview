@@ -10,6 +10,7 @@ index = {"upload_file": "00_s3.ipynb",
          "LockedAccount": "01_models.ipynb",
          "Athlete": "01_models.ipynb",
          "types": "01_models.ipynb",
+         "dagen_van_week": "01_models.ipynb",
          "Activity": "01_models.ipynb",
          "Handel": "01_models.ipynb",
          "datetime_fix": "01_models.ipynb",
@@ -37,7 +38,8 @@ modules = ["s3.py",
            "models.py",
            "ti.py",
            "auth.py",
-           "backend.py"]
+           "backend.py",
+           "plots.py"]
 
 doc_url = "https://takotabak.github.io/strava_overview/"
 

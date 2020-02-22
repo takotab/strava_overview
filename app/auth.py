@@ -46,5 +46,5 @@ def auth(state, locations):
 
 if __name__ == "__main__":
     state = SessionState.get(trys=0)
-    locations = [st.empty() for _ in range(2)]
+    locations = [st.empty() for _ in range(10)]
     auth(state, locations)

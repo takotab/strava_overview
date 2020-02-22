@@ -4,7 +4,7 @@ __all__ = ['interpolate', 'moving_average', 'norm_power', 'training_impulse_powe
            'get_ftp', 'get_max_heartrate', 'make_ti']
 
 # Cell
-from .to_csv import *
+from .models import *
 import pandas as pd
 import numpy as np
 
@@ -129,7 +129,7 @@ import streamlit as st
 def get_ftp(cls):
     at = list(Athlete.query(int(cls.athlete_id)))[0]
     if at.ftp is None:
-        at.ftp = st.number_input('Wat is uw ftp?', min_value=0, max_value=500, value = 250)
+        at.ftp = st.number_input('Wat is uw ftp?', min_value=0, max_value=500, value = 340)
         at.save()
     return at.ftp
 Activity.get_ftp = get_ftp
