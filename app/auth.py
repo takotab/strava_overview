@@ -13,7 +13,7 @@ from strava_overview.models import *
 def auth(state, locations):
     ath = None
     if ath == None:
-        auth = locations[0].button("Authenticate strava")
+        auth = locations[0].button("Authenticate Strava")
         locations[1].subheader("Of login:")
         email = locations[2].text_input("Email")
         ww = locations[3].text_input("Wachtword", type="password")
