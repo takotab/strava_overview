@@ -154,6 +154,6 @@ def make_ti(cls):
         cls.ti_w = training_impulse_power(df, cls.get_ftp())
         cls.ti = cls.ti_w
     cls.save()
-    return cls.ti
+    return {'ti':cls.ti}
 
 Activity.make_ti = make_ti
