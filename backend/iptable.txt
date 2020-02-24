@@ -1,0 +1,7 @@
+iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
+iptables -A INPUT -i lo -m comment --comment "Allow loopback connections" -j ACCEPT
+iptables -A INPUT -p icmp -m comment --comment "Allow Ping to work as expected" -j ACCEPT
+iptables -A INPUT -p tcp -m multiport --destination-ports 22,5555,8501 -j ACCEPT
+iptables -A INPUT -p udp -m multiport --destination-ports 53 -j ACCEPT
+iptables -P INPUT DROP
+iptables -P FORWARD DROP
