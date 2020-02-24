@@ -1,26 +1,24 @@
-FROM python:3.7-slim-stretch
+FROM tiangolo/uvicorn-gunicorn:python3.7
 
-RUN apt-get update && apt-get install -y git python3-dev gcc \
-    && rm -rf /var/lib/apt/lists/*
+RUN pip install fastapi
 RUN pip install --upgrade pip
-RUN pip install streamlit cloudfile
-# RUN python cloudfile
 
+WORKDIR /app
 COPY install_setup.py install_setup.py
 COPY settings.ini settings.ini
 
 RUN python install_setup.py
 RUN pip install -r req.txt
 
-WORKDIR /app
-
-COPY . /app
-
+COPY .env .env
+COPY setup.py setup.py
+COPY settings.ini setup.ini
+COPY README.md README.md
+COPY ./strava_overview strava_overview
 RUN pip install -e .
 
-# streamlit
-EXPOSE 8501
-# strava api
-EXPOSE 5555 
+COPY ./backend /app
 
-CMD ["bash", "start_streamlit.sh"]
+# streamlit
+EXPOSE 8080 
+EXPOSE 80

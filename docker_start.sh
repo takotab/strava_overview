@@ -3,7 +3,8 @@ docker rm $(docker ps -a -q)
 # docker rmi $(docker images -q)
 docker build -t str_over .
 # docker run -d --name mycontainer -p 80:80 myimage
-docker run -it -p 5555:5555 -p 8501:8501 str_over
-
-# docker exec -it a6fc05bd652a bash
-# -it -p 8080:8080 pred_api #/start-reload.sh
+docker run -it -p 80:8080 -e PORT="8080" \
+            -e WORKERS_PER_CORE="0.1"\
+            -e BIND="0.0.0.0:8080" str_over
+            # -v $PWD/shared:app/shared 
+            
