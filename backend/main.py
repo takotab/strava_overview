@@ -15,8 +15,8 @@ def read_root():
 @app.post("/authorized")
 def auth(code: str, scope: str):
     state = {"code": code, "scope": scope}
-    save_code_to_token(state)
-    return {"please return to the web page": ""}
+    token = save_code_to_token(state)
+    return {"please return to the web page\nAnd fill in the code": token}
 
 
 if __name__ == "__main__":

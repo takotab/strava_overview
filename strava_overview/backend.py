@@ -10,11 +10,6 @@ from .models import *
 
 
 # Cell
-from dotenv import load_dotenv, find_dotenv
-load_dotenv(find_dotenv())
-client_id, secret = os.getenv("client_id"), os.getenv("secret")
-
-# Cell
 def save_code_to_token(state, tokens=None, client = None, make_ath=True):
     """Excecuted by the backend if a new code is coming in."""
     client = ifnone(client, stravalib.client.Client())
@@ -31,5 +26,6 @@ def save_code_to_token(state, tokens=None, client = None, make_ath=True):
         ath.refresh_token = token['refresh_token']
         ath.save()
 
-    tokens.add(athlete.id)
+    _, tok = tokens.add(athlete.id)
+    return tok
 
