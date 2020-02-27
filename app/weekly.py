@@ -11,7 +11,6 @@ from strava_overview.models import *
 from strava_overview.ti import *
 
 
-@st.cache
 def make_df(acts):
     # return pd.DataFrame([act.row(make_ti) for act in acts[::-1]])
     return pd.DataFrame([act.row() for act in acts[::-1]])
