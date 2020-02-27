@@ -6,7 +6,7 @@ from collections import defaultdict
 from strava_overview.models import *
 from auth import auth
 from SessionState import get
-
+from weekly import weekly
 
 # def sidebar():
 #     st.sidebar.input_text()
@@ -26,14 +26,14 @@ def main():
     st.header("Motion Review")
     st.subheader("Een overview van jou trainingsweek")
     state = get(ath="", trys=0, logged_in=False)
-    locations = [st.empty() for _ in range(4)]
+    locations = [st.empty() for _ in range(10)]
     if not state.logged_in:
         auth(state, locations)
     if state.ath is not "":
-        for i in range(4):
+        for i in range(10):
             locations[i].empty()
-        st.write(f"Welkom {state.ath.firstname} {state.ath.lastname} ")
-
+        locations[0].text(f"Welkom {state.ath.firstname} {state.ath.lastname} ")
+        weekly(state, locations[1:])
 
 
 if __name__ == "__main__":

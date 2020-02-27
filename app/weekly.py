@@ -18,7 +18,6 @@ def make_df(acts):
 
 
 def weekly(state, locs):
-    locs[0].text(f"hello {state.ath.firstname} {state.ath.lastname}")
     days = 7
     h = Handel(str(state.ath.id))
     acts = h.get_activities(start_date=None, days=7)

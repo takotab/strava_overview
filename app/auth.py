@@ -5,23 +5,35 @@ from collections import defaultdict
 import numpy as np
 import pandas as pd
 import streamlit as st
+import stravalib
 
-import SessionState
+import stravalib
 from strava_overview.models import *
+from strava_overview.auth import Tokens, InvalidToken, go_strava_auth
 
 
 def auth(state, locations):
     ath = None
     if ath == None:
         auth = locations[0].button("Authenticate Strava")
-        locations[1].subheader("Of login:")
-        email = locations[2].text_input("Email")
-        ww = locations[3].text_input("Wachtword", type="password")
-
+        token = locations[1].text_input("Wat is uw strava code?", value="")
+        locations[2].subheader("Of login:")
+        email = locations[3].text_input("Email")
+        ww = locations[4].text_input("Wachtword", type="password")
         if auth:
-            state.ath = Athlete.authenticate()
-            st.balloons()
-            return state
+            client = stravalib.client.Client()
+            go_strava_auth(client)
+
+        if token != "":
+            print("code:", token)
+            try:
+                id = Tokens.done(token)
+                state.ath = Athlete.get_athlete(id)
+                st.balloons()
+                return state
+            except InvalidToken:
+                st.warning("De code in niet geldig.")
+
         if email and ww:
             state.trys += 1
             try:
