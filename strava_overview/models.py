@@ -112,20 +112,6 @@ class Athlete(Model):
         return ath
 
     @classmethod
-    def authenticate(cls, sleep_time = 60):
-        client = stravalib.client.Client()
-        go_strava_auth(client)
-        tokens = Tokens()
-        i = 0
-        while i < sleep_time:
-            i+=1
-            time.sleep(1)
-            id = tokens.is_new()
-            if id:
-                return cls.get_athlete(id = id)
-        raise FileNotFoundError
-
-    @classmethod
     def from_id(cls, id =None, **kwargs):
         if id is None:
             return cls.authenticate(**kwargs)
