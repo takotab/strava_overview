@@ -324,7 +324,9 @@ emoji_dct = {"Ride": "🚲",
              "Virtual": "🎮",
              "Weight": "💪",
              "Run": "🏃",
-             "Swim": "🏊"}
+             "Swim": "🏊",
+             "IceSkate":"⛸️",
+             }
 
 def _add_bike(row):
     for k, v in emoji_dct.items():
