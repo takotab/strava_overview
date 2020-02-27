@@ -15,14 +15,16 @@ from strava_overview.auth import Tokens, InvalidToken, go_strava_auth
 def auth(state, locations):
     ath = None
     if ath == None:
-        auth = locations[0].button("Authenticate Strava")
+        client = stravalib.client.Client()
+        url = go_strava_auth(client)
+        auth = locations[0].markdown(
+            f"Klink op deze [link]({url}) en geef toestemming om uw activateiten te zien."
+        )
         token = locations[1].text_input("Wat is uw strava code?", value="")
         locations[2].subheader("Of login:")
         email = locations[3].text_input("Email")
         ww = locations[4].text_input("Wachtword", type="password")
-        if auth:
-            client = stravalib.client.Client()
-            go_strava_auth(client)
+        # if auth:
 
         if token != "":
             print("code:", token)

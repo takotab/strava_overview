@@ -73,4 +73,5 @@ def go_strava_auth(client:stravalib.client.Client):
     authorize_url = client.authorization_url(
         client_id=client_id, redirect_uri=url, scope="activity:read_all"
     )
-    webbrowser.open(authorize_url)
+    return authorize_url
+    # webbrowser.open(authorize_url)
